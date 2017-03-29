@@ -21,14 +21,14 @@ except:
 
 
 s.send('STARTTLS\r\nRSET\r\n')
-First = s.recv(1024)
+First = s.recv(1024).strip()
 print First,
 
-if '220 ready for tls' in First:
+if First.startswith('220'):
 	ServerStatus = '\033[92mNot Vulnerable\033[0m'
 	ws = ssl.wrap_socket(s)
-	Second = ws.recv(1024)
-	if '250 flushed system and ready for new session' in Second:
+	Second = ws.recv(1024).strip()
+	if Second.startswith('250'):
 		ServerStatus = '\033[91mVunerable\033[0m'
 		print Second,
 else:
