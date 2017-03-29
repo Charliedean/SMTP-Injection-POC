@@ -22,7 +22,7 @@ except:
 
 s.send('STARTTLS\r\nRSET\r\n')
 First = s.recv(1024).strip()
-print First,
+print First
 
 if First.startswith('220'):
 	ServerStatus = '\033[92mNot Vulnerable\033[0m'
@@ -30,7 +30,7 @@ if First.startswith('220'):
 	Second = ws.recv(1024).strip()
 	if Second.startswith('250'):
 		ServerStatus = '\033[91mVunerable\033[0m'
-		print Second,
+		print Second
 else:
 	print 'Invalid Response from SMTP',
 	sys.exit(1)
